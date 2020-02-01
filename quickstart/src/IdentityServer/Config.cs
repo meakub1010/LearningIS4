@@ -13,18 +13,28 @@ namespace IdentityServer
         {
             return new IdentityResource[]
             {
-                new IdentityResources.OpenId()
+                new IdentityResources.OpenId(),
             };
         }
 
         public static IEnumerable<ApiResource> GetApis()
         {
-            return new ApiResource[] { };
+            return new ApiResource[] { new ApiResource("afcpayroll","AFC Payroll") };
         }
 
         public static IEnumerable<Client> GetClients()
         {
-            return new Client[] { };
+            return new Client[] {
+                new Client{
+                    ClientId = "console-client",
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    ClientSecrets = {
+                        new Secret("secret".Sha256())
+                    },
+                    AllowedScopes = { "afcpayroll" }
+                }
+
+            };
         }
     }
 }
