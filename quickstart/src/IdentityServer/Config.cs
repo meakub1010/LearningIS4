@@ -3,6 +3,7 @@
 
 
 using IdentityServer4.Models;
+using IdentityServer4.Test;
 using System.Collections.Generic;
 
 namespace IdentityServer
@@ -19,7 +20,7 @@ namespace IdentityServer
 
         public static IEnumerable<ApiResource> GetApis()
         {
-            return new ApiResource[] { new ApiResource("afcpayroll","AFC Payroll") };
+            return new ApiResource[] { new ApiResource("afcpayroll", "AFC Payroll") };
         }
 
         public static IEnumerable<Client> GetClients()
@@ -32,9 +33,36 @@ namespace IdentityServer
                         new Secret("secret".Sha256())
                     },
                     AllowedScopes = { "afcpayroll" }
+                },
+                new Client{
+                    ClientId = "ro.client",
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    ClientSecrets = {
+                        new Secret("ro-secret".Sha256())
+                    },
+                    AllowedScopes = { "afcpayroll" }
                 }
 
             };
         }
+        public static List<TestUser> GetUsers()
+        {
+            return new List<TestUser>
+                {
+                    new TestUser
+                    {
+                        SubjectId = "1",
+                        Username = "alice",
+                        Password = "password"
+                    },
+                    new TestUser
+                    {
+                        SubjectId = "2",
+                        Username = "bob",
+                        Password = "password"
+                    }
+            };
+        }
+
     }
 }
