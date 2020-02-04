@@ -52,6 +52,7 @@ namespace ConsoleClient
             {
                 var content = await response.Content.ReadAsStringAsync();
                 Console.WriteLine(JArray.Parse(content));
+                Console.ReadLine();
             }
         }
     }
