@@ -25,7 +25,7 @@ namespace ConsoleClient
             {
                 Address = disco.TokenEndpoint,
                 ClientId = "console-client",
-                ClientSecret = "secret",
+                ClientSecret = "standard.aspnet-secret",
 
                 Scope = "afcpayroll"
             });
