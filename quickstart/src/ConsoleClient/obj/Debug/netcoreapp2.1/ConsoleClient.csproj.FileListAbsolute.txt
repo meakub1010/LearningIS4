@@ -1,0 +1,10 @@
+C:\MyProjects\IDP Project\LearningIS4\quickstart\src\ConsoleClient\bin\Debug\netcoreapp2.1\ConsoleClient.deps.json
+C:\MyProjects\IDP Project\LearningIS4\quickstart\src\ConsoleClient\bin\Debug\netcoreapp2.1\ConsoleClient.runtimeconfig.json
+C:\MyProjects\IDP Project\LearningIS4\quickstart\src\ConsoleClient\bin\Debug\netcoreapp2.1\ConsoleClient.runtimeconfig.dev.json
+C:\MyProjects\IDP Project\LearningIS4\quickstart\src\ConsoleClient\bin\Debug\netcoreapp2.1\ConsoleClient.dll
+C:\MyProjects\IDP Project\LearningIS4\quickstart\src\ConsoleClient\bin\Debug\netcoreapp2.1\ConsoleClient.pdb
+C:\MyProjects\IDP Project\LearningIS4\quickstart\src\ConsoleClient\obj\Debug\netcoreapp2.1\ConsoleClient.csproj.CoreCompileInputs.cache
+C:\MyProjects\IDP Project\LearningIS4\quickstart\src\ConsoleClient\obj\Debug\netcoreapp2.1\ConsoleClient.AssemblyInfoInputs.cache
+C:\MyProjects\IDP Project\LearningIS4\quickstart\src\ConsoleClient\obj\Debug\netcoreapp2.1\ConsoleClient.AssemblyInfo.cs
+C:\MyProjects\IDP Project\LearningIS4\quickstart\src\ConsoleClient\obj\Debug\netcoreapp2.1\ConsoleClient.dll
+C:\MyProjects\IDP Project\LearningIS4\quickstart\src\ConsoleClient\obj\Debug\netcoreapp2.1\ConsoleClient.pdb

@@ -1,0 +1,11 @@
+C:\MyProjects\IDP Project\LearningIS4\quickstart\src\RoClient\bin\Debug\netcoreapp2.1\RoClient.deps.json
+C:\MyProjects\IDP Project\LearningIS4\quickstart\src\RoClient\bin\Debug\netcoreapp2.1\RoClient.runtimeconfig.json
+C:\MyProjects\IDP Project\LearningIS4\quickstart\src\RoClient\bin\Debug\netcoreapp2.1\RoClient.runtimeconfig.dev.json
+C:\MyProjects\IDP Project\LearningIS4\quickstart\src\RoClient\bin\Debug\netcoreapp2.1\RoClient.dll
+C:\MyProjects\IDP Project\LearningIS4\quickstart\src\RoClient\bin\Debug\netcoreapp2.1\RoClient.pdb
+C:\MyProjects\IDP Project\LearningIS4\quickstart\src\RoClient\obj\Debug\netcoreapp2.1\RoClient.csprojAssemblyReference.cache
+C:\MyProjects\IDP Project\LearningIS4\quickstart\src\RoClient\obj\Debug\netcoreapp2.1\RoClient.csproj.CoreCompileInputs.cache
+C:\MyProjects\IDP Project\LearningIS4\quickstart\src\RoClient\obj\Debug\netcoreapp2.1\RoClient.AssemblyInfoInputs.cache
+C:\MyProjects\IDP Project\LearningIS4\quickstart\src\RoClient\obj\Debug\netcoreapp2.1\RoClient.AssemblyInfo.cs
+C:\MyProjects\IDP Project\LearningIS4\quickstart\src\RoClient\obj\Debug\netcoreapp2.1\RoClient.dll
+C:\MyProjects\IDP Project\LearningIS4\quickstart\src\RoClient\obj\Debug\netcoreapp2.1\RoClient.pdb
