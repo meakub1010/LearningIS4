@@ -40,7 +40,7 @@ namespace MVCApp
             .AddCookie("Cookies")
             // below for implicit flow
             
-            
+            /*
             .AddOpenIdConnect("oidc", options =>
             {
                 options.Authority = "http://localhost:5000";
@@ -50,7 +50,7 @@ namespace MVCApp
                 options.ClientId = "mvc";
                 options.SaveTokens = true;
             })
-            
+            */
 
             // below code for mvc hybrid flow
             .AddOpenIdConnect("oidc", options => {
