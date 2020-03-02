@@ -3,8 +3,13 @@
 ################################################################################
 
 /quickstart/.vs
-Debug
-.pdb
+/Debug/*.*
+/debug/*.*
+/bin/*.*
 .dll
-bin
-/quickstart/src/MVCApp/obj
+.debug
+.pdb
+.txt
+obj
+Object
+*.cache

@@ -6,6 +6,7 @@ using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace IdentityServer
 {
@@ -58,7 +59,46 @@ namespace IdentityServer
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         "afcpayroll" }
-                }
+                },
+                new Client{
+                    ClientId = "mvc",
+                    ClientName = "MVC Client",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+
+                    // where to redirect to after login
+                    RedirectUris = { "http://localhost:5002/signin-oidc" },
+
+                    // where to redirect to after logout
+                    PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },
+
+                    AllowedScopes = 
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile
+                    }
+                },
+                new Client
+                {
+                    ClientId = "mvc-hybrid",
+                    ClientName = "MVC Hybrid",
+                    AllowedGrantTypes = GrantTypes.Hybrid,
+
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
+
+                    RedirectUris           = { "http://localhost:5002/signin-oidc" },
+                    PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "afcpayroll"
+                    },
+                    AllowOfflineAccess = true
+                },
 
             };
         }
@@ -70,13 +110,23 @@ namespace IdentityServer
                     {
                         SubjectId = "1",
                         Username = "alice",
-                        Password = "password"
+                        Password = "password",
+                        Claims = new []
+                        {
+                            new Claim("name", "Alice"),
+                            new Claim("website", "https://alice.com")
+                        }
                     },
                     new TestUser
                     {
                         SubjectId = "2",
                         Username = "bob",
-                        Password = "password"
+                        Password = "password",
+                        Claims = new []
+                        {
+                            new Claim("name", "bob"),
+                            new Claim("website", "https://bob.com")
+                        }
                     }
             };
         }

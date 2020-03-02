@@ -20,12 +20,12 @@ namespace MVCApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
+            //services.Configure<CookiePolicyOptions>(options =>
+            //{
+            //    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+            //    options.CheckConsentNeeded = context => true;
+            //    options.MinimumSameSitePolicy = SameSiteMode.None;
+            //});
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -37,15 +37,39 @@ namespace MVCApp
                 options.DefaultScheme = "Cookies";
                 options.DefaultChallengeScheme = "oidc";
             })
-               .AddCookie("Cookies")
-               .AddOpenIdConnect("oidc", options =>
-               {
-                   options.Authority = "http://localhost:5000";
-                   options.RequireHttpsMetadata = false;
+            .AddCookie("Cookies")
+            // below for implicit flow
+            
+            
+            .AddOpenIdConnect("oidc", options =>
+            {
+                options.Authority = "http://localhost:5000";
+               
+                options.RequireHttpsMetadata = false;
+                options.ClientSecret = "secret";
+                options.ClientId = "mvc";
+                options.SaveTokens = true;
+            })
+            
 
-                   options.ClientId = "mvc.client";
-                   options.SaveTokens = true;
-               });
+            // below code for mvc hybrid flow
+            .AddOpenIdConnect("oidc", options => {
+                //options.SignInScheme = "Cookies";
+
+                options.Authority = "http://localhost:5000";
+                options.RequireHttpsMetadata = false;
+
+                options.ClientId = "mvc-hybrid";
+                options.ClientSecret = "secret";
+                options.ResponseType = "code id_token";
+
+                options.SaveTokens = true;
+                options.GetClaimsFromUserInfoEndpoint = true;
+
+                //options.Scope.Add()
+
+            })
+            ;
 
         }
 
@@ -68,10 +92,6 @@ namespace MVCApp
 
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
-            
-
-            
 
             app.UseMvc(routes =>
             {
