@@ -8,3 +8,4 @@ C:\MyProjects\IDP Project\LearningIS4\quickstart\src\ConsoleClient\obj\Debug\net
 C:\MyProjects\IDP Project\LearningIS4\quickstart\src\ConsoleClient\obj\Debug\netcoreapp2.1\ConsoleClient.AssemblyInfo.cs
 C:\MyProjects\IDP Project\LearningIS4\quickstart\src\ConsoleClient\obj\Debug\netcoreapp2.1\ConsoleClient.dll
 C:\MyProjects\IDP Project\LearningIS4\quickstart\src\ConsoleClient\obj\Debug\netcoreapp2.1\ConsoleClient.pdb
+C:\MyProjects\IDP Project\LearningIS4\quickstart\src\ConsoleClient\obj\Debug\netcoreapp2.1\ConsoleClient.csprojAssemblyReference.cache
