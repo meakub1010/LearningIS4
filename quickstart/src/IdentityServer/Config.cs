@@ -5,6 +5,7 @@
 using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 
@@ -114,7 +115,9 @@ namespace IdentityServer
                         Claims = new []
                         {
                             new Claim("name", "Alice"),
-                            new Claim("website", "https://alice.com")
+                            new Claim("age", "30"),
+                            new Claim("website", "https://alice.com"),
+                            new Claim("dateofbirth", DateTime.Now.ToShortDateString())
                         }
                     },
                     new TestUser
@@ -125,7 +128,9 @@ namespace IdentityServer
                         Claims = new []
                         {
                             new Claim("name", "bob"),
-                            new Claim("website", "https://bob.com")
+                             new Claim("age", "35"),
+                            new Claim("website", "https://bob.com"),
+                            new Claim("dateofbirth", DateTime.Now.ToShortDateString())
                         }
                     }
             };
