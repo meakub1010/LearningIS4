@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CustomPolicyProvider;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authorization;
+using CustomPolicyProvider.Policy;
 
 namespace Api
 {
@@ -26,6 +29,13 @@ namespace Api
                     options.RequireHttpsMetadata = false;
                     options.Audience = "afcpayroll";
                 });
+
+            services.AddAuthorization(options => {
+                options.AddPolicy("ReadClaims", policy => {
+                    policy.AddRequirements(new ReadClaimsRequirement(""));
+                });
+            });
+            services.AddSingleton<IAuthorizationHandler, ReadClaimsHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

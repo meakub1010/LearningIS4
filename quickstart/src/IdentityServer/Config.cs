@@ -2,9 +2,11 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
+using IdentityModel;
 using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 
@@ -113,8 +115,10 @@ namespace IdentityServer
                         Password = "password",
                         Claims = new []
                         {
-                            new Claim("name", "Alice"),
-                            new Claim("website", "https://alice.com")
+                            new Claim(JwtClaimTypes.Name, "alice"),
+                            //new Claim("age", "30"),
+                            new Claim(JwtClaimTypes.WebSite, "https://alice.com"),
+                            new Claim(JwtClaimTypes.BirthDate, DateTime.Now.ToShortDateString())
                         }
                     },
                     new TestUser
@@ -124,8 +128,10 @@ namespace IdentityServer
                         Password = "password",
                         Claims = new []
                         {
-                            new Claim("name", "bob"),
-                            new Claim("website", "https://bob.com")
+                            new Claim(JwtClaimTypes.Name, "bob"),
+                             //new Claim("age", "35"),
+                            new Claim(JwtClaimTypes.WebSite, "https://bob.com"),
+                            new Claim(JwtClaimTypes.BirthDate, DateTime.Now.ToShortDateString())
                         }
                     }
             };
