@@ -17,10 +17,10 @@ namespace CustomPolicyProvider
         // Check whether a given MinimumAgeRequirement is satisfied or not for a particular context
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, MinAgeRequirement requirement)
         {
-            if (!context.User.HasClaim(c => c.Type == ClaimTypes.Name)) {
+            if (!context.User.HasClaim(c => c.Type.Equals("name"))) {
                 return Task.CompletedTask;
             }
-            var name = context.User.FindFirst(u => u.Type == ClaimTypes.Name).Value;
+            var name = context.User.FindFirst(u => u.Type.Equals("name")).Value;
             int age = 5;
             if (name.ToLower().Equals("alice")) {
                 age = 20;

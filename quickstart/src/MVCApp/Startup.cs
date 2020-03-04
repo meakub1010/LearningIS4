@@ -31,14 +31,17 @@ namespace MVCApp
             //});
 
 
-            services.AddMvc(config =>
-            {
-                var policy = new AuthorizationPolicyBuilder()
-                            .RequireAuthenticatedUser()
-                            .Build();
+            services
+            //    .AddMvc(config =>
+            //{
+            //    var policy = new AuthorizationPolicyBuilder()
+            //                .RequireAuthenticatedUser()
+            //                .Build();
 
-                config.Filters.Add(new AuthorizeFilter(policy));
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            //    config.Filters.Add(new AuthorizeFilter(policy));
+            //})
+            .AddMvc()
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
@@ -105,11 +108,9 @@ namespace MVCApp
             }
 
             //app.UseHttpsRedirection();
-            //app.UseAuthorization();
 
             app.UseAuthentication();
 
-            
 
             app.UseStaticFiles();
             app.UseCookiePolicy();
