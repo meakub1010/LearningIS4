@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using CustomPolicyProvider;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.IdentityModel.Tokens.Jwt;
@@ -28,7 +31,14 @@ namespace MVCApp
             //});
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                            .RequireAuthenticatedUser()
+                            .Build();
+
+                config.Filters.Add(new AuthorizeFilter(policy));
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
@@ -71,6 +81,14 @@ namespace MVCApp
             })
             ;
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("MinimumAge", policy => {
+                    policy.AddRequirements(new MinAgeRequirement(10));
+                });
+            });
+
+            services.AddSingleton<IAuthorizationHandler, MinAgeAuthorizationHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,8 +105,11 @@ namespace MVCApp
             }
 
             //app.UseHttpsRedirection();
+            //app.UseAuthorization();
 
             app.UseAuthentication();
+
+            
 
             app.UseStaticFiles();
             app.UseCookiePolicy();

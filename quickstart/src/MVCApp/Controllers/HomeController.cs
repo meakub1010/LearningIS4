@@ -13,6 +13,7 @@ namespace MVCApp.Controllers
             return View();
         }
 
+        [Authorize(Policy = "MinimumAge")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
