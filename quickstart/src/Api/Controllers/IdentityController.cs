@@ -17,5 +17,13 @@ namespace Api.Controllers
         {
             return new JsonResult(from c in User.Claims select new { c.Type, c.Value });
         }
+
+        [HttpGet]
+        [Route("claims")]
+        [Authorize(Policy = "ReadClaims")]
+        public IActionResult GetClaims()
+        {
+            return new JsonResult(from c in User.Claims select new { c.Type, c.Value });
+        }
     }
 }

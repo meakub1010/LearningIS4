@@ -31,16 +31,7 @@ namespace MVCApp
             //});
 
 
-            services
-            //    .AddMvc(config =>
-            //{
-            //    var policy = new AuthorizationPolicyBuilder()
-            //                .RequireAuthenticatedUser()
-            //                .Build();
-
-            //    config.Filters.Add(new AuthorizeFilter(policy));
-            //})
-            .AddMvc()
+            services.AddMvc()
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
@@ -79,7 +70,7 @@ namespace MVCApp
                 options.SaveTokens = true;
                 options.GetClaimsFromUserInfoEndpoint = true;
 
-                //options.Scope.Add()
+                options.Scope.Add("afcpayroll");
 
             })
             ;
