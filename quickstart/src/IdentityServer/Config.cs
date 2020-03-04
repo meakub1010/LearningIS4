@@ -99,7 +99,7 @@ namespace IdentityServer
                         IdentityServerConstants.StandardScopes.Profile,
                         "afcpayroll"
                     },
-                    AllowOfflineAccess = true
+                    AllowOfflineAccess = true,
                 },
 
             };
