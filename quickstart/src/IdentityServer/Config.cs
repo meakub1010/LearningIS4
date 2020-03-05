@@ -117,7 +117,7 @@ namespace IdentityServer
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
-                        "afcpayroll"
+                        "api1"
                     }
                 }
             };
