@@ -14,6 +14,7 @@
 
 document.getElementById("login").addEventListener("click", login, false);
 document.getElementById("api").addEventListener("click", api, false);
+document.getElementById("authApi").addEventListener("click", authApi, false);
 document.getElementById("logout").addEventListener("click", logout, false);
 
 
@@ -55,6 +56,22 @@ function api() {
     });
 }
 
+function authApi() {
+    mgr.getUser().then(function (user) {
+        var url = "http://localhost:5004/Home/PrivacyAsync";
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        xhr.onload = function () {
+            //log(xhr.status, JSON.parse(xhr.responseText));
+
+            document.getElementById('results').innerHTML = xhr.responseText;
+
+        }
+        xhr.setRequestHeader("Authorization", "Bearer " + user.access_token);
+        xhr.send();
+    });
+}
 function logout() {
     mgr.signoutRedirect();
 }

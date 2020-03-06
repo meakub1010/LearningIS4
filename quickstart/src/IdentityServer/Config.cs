@@ -134,7 +134,7 @@ namespace IdentityServer
                         Claims = new []
                         {
                             new Claim(JwtClaimTypes.Name, "alice"),
-                            //new Claim("age", "30"),
+                            new Claim(JwtClaimTypes.Role, "OpAdmin"),
                             new Claim(JwtClaimTypes.WebSite, "https://alice.com"),
                             new Claim(JwtClaimTypes.BirthDate, DateTime.Now.ToShortDateString())
                         }
@@ -147,7 +147,7 @@ namespace IdentityServer
                         Claims = new []
                         {
                             new Claim(JwtClaimTypes.Name, "bob"),
-                             //new Claim("age", "35"),
+                            new Claim(JwtClaimTypes.Role, "UpkAdmin"),
                             new Claim(JwtClaimTypes.WebSite, "https://bob.com"),
                             new Claim(JwtClaimTypes.BirthDate, DateTime.Now.ToShortDateString())
                         }
