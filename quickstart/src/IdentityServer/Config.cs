@@ -99,9 +99,27 @@ namespace IdentityServer
                         IdentityServerConstants.StandardScopes.Profile,
                         "afcpayroll"
                     },
-                    AllowOfflineAccess = true
+                    AllowOfflineAccess = true,
                 },
+                new Client
+                {
+                    ClientId = "js",
+                    ClientName = "JavaScript Client",
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequirePkce = true,
+                    RequireClientSecret = false,
 
+                    RedirectUris =           { "http://localhost:5003/callback.html" },
+                    PostLogoutRedirectUris = { "http://localhost:5003/index.html" },
+                    AllowedCorsOrigins =     { "http://localhost:5003" },
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "afcpayroll"
+                    }
+                }
             };
         }
         public static List<TestUser> GetUsers()
@@ -116,7 +134,7 @@ namespace IdentityServer
                         Claims = new []
                         {
                             new Claim(JwtClaimTypes.Name, "alice"),
-                            //new Claim("age", "30"),
+                            new Claim(JwtClaimTypes.Role, "OpAdmin"),
                             new Claim(JwtClaimTypes.WebSite, "https://alice.com"),
                             new Claim(JwtClaimTypes.BirthDate, DateTime.Now.ToShortDateString())
                         }
@@ -129,7 +147,7 @@ namespace IdentityServer
                         Claims = new []
                         {
                             new Claim(JwtClaimTypes.Name, "bob"),
-                             //new Claim("age", "35"),
+                            new Claim(JwtClaimTypes.Role, "UpkAdmin"),
                             new Claim(JwtClaimTypes.WebSite, "https://bob.com"),
                             new Claim(JwtClaimTypes.BirthDate, DateTime.Now.ToShortDateString())
                         }
