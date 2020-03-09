@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -32,7 +33,8 @@ namespace Mvc.Authorization.Server
             //});
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc();
+                //.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             //services.AddAuthorization(options =>
             //{
@@ -41,10 +43,15 @@ namespace Mvc.Authorization.Server
             //    });
             //});
 
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new CorsAuthorizationFilterFactory("jsclient"));
+            });
+
             services.AddCors(options =>
             {
                 // this defines a CORS policy called "default"
-                options.AddPolicy("default", policy =>
+                options.AddPolicy("jsclient", policy =>
                 {
                     policy.WithOrigins("http://localhost:5003")
                         .AllowAnyHeader()
@@ -56,9 +63,6 @@ namespace Mvc.Authorization.Server
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-
-            app.UseCors("default");
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -67,6 +71,8 @@ namespace Mvc.Authorization.Server
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseCors("jsclient");
 
             app.UseStaticFiles();
             app.UseCookiePolicy();

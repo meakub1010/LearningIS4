@@ -68,6 +68,8 @@ function authApi() {
             document.getElementById('results').innerHTML = xhr.responseText;
 
         }
+        //client.DefaultRequestHeaders.Add("Access-Control-Allow-Origin", "*");
+        //xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
         xhr.setRequestHeader("Authorization", "Bearer " + user.access_token);
         xhr.send();
     });

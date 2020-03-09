@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
@@ -34,7 +35,7 @@ namespace Mvc.Authorization.Server.Controllers
 
             return View();
         }
-
+        
         public async Task<IActionResult> PrivacyAsync()
         {
             var accessToken = ((Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpRequestHeaders)HttpContext.Request.Headers).HeaderAuthorization.ToArray()[0].Split(" ")[1];
@@ -44,13 +45,13 @@ namespace Mvc.Authorization.Server.Controllers
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
             var content =  await client.GetStringAsync("http://localhost:5001/identity/claims");
-
+            
             ViewBag.Json = JArray.Parse(content).ToString();
             //return View("CallApi");
-
+            
             ViewResult vrs = View("Privacy", ViewBag.Json);
 
-            JsonResult jr = new JsonResult(JArray.Parse(content));
+            //JsonResult jr = new JsonResult(JArray.Parse(content));
 
             return vrs;
         }
