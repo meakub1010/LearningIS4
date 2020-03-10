@@ -46,12 +46,7 @@ namespace Mvc.Authorization.Server.Controllers
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
             var content =  await client.GetStringAsync("http://localhost:5001/identity/claims");
             
-            ViewBag.Json = JArray.Parse(content).ToString();
-            //return View("CallApi");
-            
-            ViewResult vrs = View("Privacy", ViewBag.Json);
-
-            //JsonResult jr = new JsonResult(JArray.Parse(content));
+            ViewResult vrs = View("Privacy", JArray.Parse(content));
 
             return vrs;
         }
