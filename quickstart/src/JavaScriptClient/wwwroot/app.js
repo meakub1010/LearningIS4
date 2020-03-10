@@ -31,6 +31,7 @@ var mgr = new Oidc.UserManager(config);
 
 mgr.getUser().then(function (user) {
     if (user) {
+        console.log(user);
         log("User logged in", user.profile);
     }
     else {
