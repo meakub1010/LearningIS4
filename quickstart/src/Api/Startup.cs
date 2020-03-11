@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authorization;
 using CustomPolicyProvider.Policy;
+using IdentityServer4.AccessTokenValidation;
 
 namespace Api
 {
@@ -22,13 +23,23 @@ namespace Api
                 .AddAuthorization()
                 .AddJsonFormatters();
 
-            services.AddAuthentication("Bearer")
-                .AddJwtBearer("Bearer", options =>
-                {
-                    options.Authority = "http://localhost:5000";
-                    options.RequireHttpsMetadata = false;
-                    options.Audience = "afcpayroll";
-                });
+
+            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+            .AddIdentityServerAuthentication(options =>
+            {
+                options.Authority = "http://localhost:5000";
+                options.ApiName = "afcpayroll";
+                options.ApiSecret = "secret";
+                options.RequireHttpsMetadata = false;
+            });
+
+            //services.AddAuthentication("Bearer")
+            //    .AddJwtBearer("Bearer", options =>
+            //    {
+            //        options.Authority = "http://localhost:5000";
+            //        options.RequireHttpsMetadata = false;
+            //        options.Audience = "afcpayroll";
+            //    });
 
             services.AddAuthorization(options => {
                 options.AddPolicy("ReadClaims", policy => {
