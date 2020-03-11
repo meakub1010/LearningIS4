@@ -25,7 +25,7 @@ namespace IdentityServer
 
         public static IEnumerable<ApiResource> GetApis()
         {
-            return new ApiResource[] { new ApiResource("afcpayroll", "AFC Payroll") };
+            return new ApiResource[] { new ApiResource("afcpayroll", "AFC Payroll") { ApiSecrets = { new Secret("secret".Sha256()) } } };
         }
 
         public static IEnumerable<Client> GetClients()
@@ -45,7 +45,17 @@ namespace IdentityServer
                     ClientSecrets = {
                         new Secret("ro-secret".Sha256())
                     },
-                    AllowedScopes = { "afcpayroll" }
+                    AllowedScopes = { "afcpayroll" },
+
+                    AccessTokenLifetime = 10,
+                    IdentityTokenLifetime = 30,
+                    AccessTokenType = AccessTokenType.Reference,
+                    
+                    AllowOfflineAccess = true,
+
+                    AbsoluteRefreshTokenLifetime = 10,
+                    RefreshTokenUsage = TokenUsage.OneTimeOnly,
+                    RefreshTokenExpiration = TokenExpiration.Absolute
                 },
                 new Client{
                     ClientId = "standard.aspnet.client",
@@ -118,7 +128,15 @@ namespace IdentityServer
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         "afcpayroll"
-                    }
+                    },
+
+                    AllowOfflineAccess = true,
+                    AccessTokenLifetime = 3,
+                    IdentityTokenLifetime = 3,
+                    AccessTokenType = AccessTokenType.Reference,
+                    RefreshTokenExpiration = TokenExpiration.Absolute,
+                    RefreshTokenUsage = TokenUsage.OneTimeOnly,
+                    AbsoluteRefreshTokenLifetime = 5
                 }
             };
         }

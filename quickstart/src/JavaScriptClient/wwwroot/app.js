@@ -8,7 +8,7 @@
         else if (typeof msg !== 'string') {
             msg = JSON.stringify(msg, null, 2);
         }
-        document.getElementById('results').innerHTML += msg + '\r\n';
+        document.getElementById('results').innerHTML = msg;
     });
 }
 
@@ -23,15 +23,19 @@ var config = {
     client_id: "js",
     redirect_uri: "http://localhost:5003/callback.html",
     response_type: "code",
-    scope: "openid profile afcpayroll",
-    post_logout_redirect_uri: "http://localhost:5003/index.html",
+    scope: "openid profile afcpayroll offline_access",
+    post_logout_redirect_uri: "http://localhost:5003/index.html"
 };
 var mgr = new Oidc.UserManager(config);
-
+mgr.startSilentRenew();
 
 mgr.getUser().then(function (user) {
     if (user) {
         console.log(user);
+
+        console.log(user.expires_at);
+        console.log(user.expired);
+
         log("User logged in", user.profile);
     }
     else {
@@ -45,6 +49,10 @@ function login() {
 
 function api() {
     mgr.getUser().then(function (user) {
+        
+        console.log(user.expires_at);
+        console.log(user.expired);
+        
         var url = "http://localhost:5001/identity";
 
         var xhr = new XMLHttpRequest();
