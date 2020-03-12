@@ -16,24 +16,26 @@ document.getElementById("login").addEventListener("click", login, false);
 document.getElementById("api").addEventListener("click", api, false);
 document.getElementById("authApi").addEventListener("click", authApi, false);
 document.getElementById("logout").addEventListener("click", logout, false);
-
+document.getElementById("silent").addEventListener("click", silent);
 
 var config = {
     authority: "http://localhost:5000",
     client_id: "js",
     redirect_uri: "http://localhost:5003/callback.html",
     response_type: "code",
-    scope: "openid profile afcpayroll offline_access",
-    post_logout_redirect_uri: "http://localhost:5003/index.html"
+    scope: "openid profile email afcpayroll offline_access",
+    post_logout_redirect_uri: "http://localhost:5003/index.html",
+    automaticSilentRenew: false,
+    silent_redirect_uri: "http://localhost:5003/silent.html"
 };
 var mgr = new Oidc.UserManager(config);
-mgr.startSilentRenew();
+//mgr.startSilentRenew();
 
 mgr.getUser().then(function (user) {
     if (user) {
         console.log(user);
 
-        console.log(user.expires_at);
+        //console.log(user.expires_at);
         console.log(user.expired);
 
         log("User logged in", user.profile);
@@ -47,12 +49,12 @@ function login() {
     mgr.signinRedirect();
 }
 
-function api() {
-    mgr.getUser().then(function (user) {
-        
-        console.log(user.expires_at);
-        console.log(user.expired);
-        
+function loadApiData(user) {
+    //mgr.getUser().then(function (user) {
+    //    console.log(user);
+    //    //console.log(user.expires_at);
+    //    console.log(user.expired);
+
         var url = "http://localhost:5001/identity";
 
         var xhr = new XMLHttpRequest();
@@ -62,6 +64,26 @@ function api() {
         }
         xhr.setRequestHeader("Authorization", "Bearer " + user.access_token);
         xhr.send();
+    //});
+}
+
+function api() {
+    mgr.getUser().then(function (user) {
+        console.log(user);
+        //console.log(user.expires_at);
+        console.log(user.expired);
+        if (user.expired) {
+            mgr.signinSilent().then(function (user) {
+                console.log("silent renew success! and loading data", user);
+                loadApiData(user);
+            }).catch(function (err) {
+                console.log(err);
+                login();
+            });
+        }
+        else {
+            loadApiData(user);
+        }
     });
 }
 
@@ -83,6 +105,23 @@ function authApi() {
         xhr.send();
     });
 }
+function silent() {
+    mgr.signinSilent().then(function (user) {
+        console.log(user);
+    }).catch(function (err) {
+        logout();
+    });
+}
+
 function logout() {
     mgr.signoutRedirect();
 }
+
+mgr.events.addAccessTokenExpired(function () {
+    console.log('silent refresh about to happen!');
+    silent();
+});
+
+mgr.events.addUserSignedOut(function () {
+    log("user is now signed out of the token server");
+});
