@@ -31,6 +31,10 @@ var config = {
 var mgr = new Oidc.UserManager(config);
 //mgr.startSilentRenew();
 
+
+var refreshCount = 0;
+var refreshLimit = 4;
+
 mgr.getUser().then(function (user) {
     if (user) {
         console.log(user);
@@ -107,6 +111,8 @@ function authApi() {
 }
 function silent() {
     mgr.signinSilent().then(function (user) {
+        refreshCount++;
+        console.log('refresh count: ' + refreshCount);
         console.log(user);
     }).catch(function (err) {
         logout();
@@ -118,9 +124,26 @@ function logout() {
 }
 
 mgr.events.addAccessTokenExpired(function () {
-    console.log('silent refresh about to happen!');
-    silent();
+
+    if (refreshCount < refreshLimit) {
+        silent();
+        console.log('silent refresh about to happen!');
+    }
+    else {
+        console.log('refresh limit exceed');
+        var go = confirm('Would like stay login?');
+        console.log(go);
+
+        if(go){
+            logout();
+        }
+        else {
+            refreshCount = 0;
+        }
+    }
 });
+
+
 
 mgr.events.addUserSignedOut(function () {
     log("user is now signed out of the token server");

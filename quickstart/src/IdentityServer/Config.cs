@@ -118,7 +118,7 @@ namespace IdentityServer
                     },
                     AllowOfflineAccess = false, // no refresh token
                     IdentityTokenLifetime = 30,
-                    AccessTokenLifetime = 120
+                    //AccessTokenLifetime = 90
                 },
                 new Client
                 {
@@ -153,7 +153,7 @@ namespace IdentityServer
                     RefreshTokenUsage = TokenUsage.ReUse,
                     AlwaysSendClientClaims = true,
                     SlidingRefreshTokenLifetime = 40,
-                    AbsoluteRefreshTokenLifetime = 120 // 3 mins
+                    AbsoluteRefreshTokenLifetime = 180 // 3 mins
                 }
             };
         }

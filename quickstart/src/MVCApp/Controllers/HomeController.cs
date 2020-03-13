@@ -10,9 +10,10 @@ using System.Threading.Tasks;
 
 namespace MVCApp.Controllers
 {
-    [Authorize]
+    
     public class HomeController : Controller
     {
+        [Authorize]
         public IActionResult Index()
         {
             return View();
