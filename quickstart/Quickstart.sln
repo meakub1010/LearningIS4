@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVCApp", "src\MVCApp\MVCApp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomPolicyProvider", "src\CustomPolicyProvider\CustomPolicyProvider.csproj", "{F6F9443B-484B-4F54-85C3-FBF68A8ED6FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc.Authorization.Server", "src\Mvc.Authorization.Server\Mvc.Authorization.Server.csproj", "{7FEC4310-9A56-4579-BEE3-74068F593642}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mvc.Authorization.Server", "src\Mvc.Authorization.Server\Mvc.Authorization.Server.csproj", "{7FEC4310-9A56-4579-BEE3-74068F593642}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JavaScriptClient", "src\JavaScriptClient\JavaScriptClient.csproj", "{B6F4F810-0755-4860-AB81-4E3F7CA31BDC}"
 EndProject
