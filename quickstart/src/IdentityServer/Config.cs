@@ -154,6 +154,26 @@ namespace IdentityServer
                     AlwaysSendClientClaims = true,
                     SlidingRefreshTokenLifetime = 40,
                     AbsoluteRefreshTokenLifetime = 180 // 3 mins
+                },
+                new Client{
+                     ClientId = "vbnet",
+                    ClientName = "VbNet Client",
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequirePkce = true,
+                    RequireClientSecret = false,
+
+                    RedirectUris =           { "http://localhost:5005/About.aspx" },
+                    PostLogoutRedirectUris = { "http://localhost:5005/Default.aspx" },
+                    AllowedCorsOrigins =     { "http://localhost:5005" },
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Email,
+                        "afcpayroll"
+                    },
+                    RequireConsent = false
                 }
             };
         }
