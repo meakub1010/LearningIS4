@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authorization;
 using CustomPolicyProvider.Policy;
+using IdentityServer4.AccessTokenValidation;
 
 namespace Api
 {
@@ -22,13 +23,23 @@ namespace Api
                 .AddAuthorization()
                 .AddJsonFormatters();
 
-            services.AddAuthentication("Bearer")
-                .AddJwtBearer("Bearer", options =>
-                {
-                    options.Authority = "http://localhost:5000";
-                    options.RequireHttpsMetadata = false;
-                    options.Audience = "afcpayroll";
-                });
+
+            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+            .AddIdentityServerAuthentication(options =>
+            {
+                options.Authority = "http://localhost:5000";
+                options.ApiName = "afcpayroll";
+                options.ApiSecret = "secret";
+                options.RequireHttpsMetadata = false;
+            });
+
+            //services.AddAuthentication("Bearer")
+            //    .AddJwtBearer("Bearer", options =>
+            //    {
+            //        options.Authority = "http://localhost:5000";
+            //        options.RequireHttpsMetadata = false;
+            //        options.Audience = "afcpayroll";
+            //    });
 
             services.AddAuthorization(options => {
                 options.AddPolicy("ReadClaims", policy => {
@@ -36,6 +47,18 @@ namespace Api
                 });
             });
             services.AddSingleton<IAuthorizationHandler, ReadClaimsHandler>();
+
+            services.AddCors(options =>
+            {
+                // this defines a CORS policy called "default"
+                options.AddPolicy("default", policy =>
+                {
+                    policy.WithOrigins("http://localhost:5003")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,7 +68,7 @@ namespace Api
             //{
             //    app.UseDeveloperExceptionPage();
             //}
-
+            app.UseCors("default");
             app.UseAuthentication();
             app.UseMvc();
 

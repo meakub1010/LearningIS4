@@ -21,6 +21,7 @@ namespace RoClient
             }
 
             // request token
+            
             var tokenResponse = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
             {
                 Address = disco.TokenEndpoint,
@@ -29,7 +30,7 @@ namespace RoClient
 
                 UserName = "alice",
                 Password = "password",
-                Scope = "afcpayroll"
+                Scope = "afcpayroll offline_access"
             });
 
             if (tokenResponse.IsError)
@@ -41,6 +42,10 @@ namespace RoClient
             Console.WriteLine(tokenResponse.Json);
 
             Console.WriteLine("\n\n");
+
+
+            
+
 
             // call api
             var apiClient = new HttpClient();
@@ -54,6 +59,8 @@ namespace RoClient
             else
             {
                 var content = await response.Content.ReadAsStringAsync();
+                
+
                 Console.WriteLine(JArray.Parse(content));
                 Console.ReadLine();
             }
