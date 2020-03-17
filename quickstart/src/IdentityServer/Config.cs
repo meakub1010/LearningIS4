@@ -154,7 +154,8 @@ namespace IdentityServer
                     AlwaysSendClientClaims = true,
                     SlidingRefreshTokenLifetime = 40,
                     AbsoluteRefreshTokenLifetime = 180 // 3 mins
-                },
+                }
+                ,
                 new Client{
                      ClientId = "vbnet",
                     ClientName = "VbNet Client",
@@ -162,7 +163,7 @@ namespace IdentityServer
                     RequirePkce = true,
                     RequireClientSecret = false,
 
-                    RedirectUris =           { "http://localhost:5005/About.aspx" },
+                    RedirectUris =           { "http://localhost:5005/callback.html" },
                     PostLogoutRedirectUris = { "http://localhost:5005/Default.aspx" },
                     AllowedCorsOrigins =     { "http://localhost:5005" },
 
