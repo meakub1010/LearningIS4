@@ -6,7 +6,7 @@
                 <div id="results" runat="server"></div>
                 <button id="login" onclick="login()" runat="server">Login</button>
             
-
+                    <button id="logout" onclick="logout()" runat="server">Logout</button>
 
 
 </asp:Content>

@@ -30,4 +30,13 @@ Partial Public Class _Default
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents login As Global.System.Web.UI.HtmlControls.HtmlButton
+    
+    '''<summary>
+    '''logout control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents logout As Global.System.Web.UI.HtmlControls.HtmlButton
 End Class

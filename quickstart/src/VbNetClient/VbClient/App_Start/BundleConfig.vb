@@ -11,8 +11,7 @@ Public Class BundleConfig
                         "~/Scripts/oidc-client/oidc-client.d.js",
                         "~/Scripts/oidc-client/oidc-client.min.js",
                         "~/Scripts/oidc-client/oidc-client.slim.js",
-                        "~/Scripts/oidc-client/oidc-client.slim.min.js",
-                        "~/Scripts/oidc-client/app.js"))
+                        "~/Scripts/oidc-client/oidc-client.slim.min.js"))
 
         'bundles.Add(New ScriptBundle("~/bundles/appjs").Include(
         '                "~/Scripts/oidc-client/app.js"))

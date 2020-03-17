@@ -11,12 +11,20 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
-    <asp:PlaceHolder runat="server">
+   <%-- <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/odic-client") %>
-    </asp:PlaceHolder>
-<%--    <asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/bundles/appjs") %>
     </asp:PlaceHolder>--%>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("Scripts/oidc-client/oidc-client.js") %>
+    </asp:PlaceHolder>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("Scripts/oidc-client/app.js?v=3") %>
+    </asp:PlaceHolder>
+    <script type="text/javascript">
+       
+    </script>
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 </head>

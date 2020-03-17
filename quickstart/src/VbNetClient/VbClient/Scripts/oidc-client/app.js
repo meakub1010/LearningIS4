@@ -22,7 +22,7 @@
 var config = {
     authority: "http://localhost:5000",
     client_id: "vbnet",
-    redirect_uri: "http://localhost:5005/About.aspx",
+    redirect_uri: "http://localhost:5005/callback.html",
     response_type: "code",
     scope: "openid profile email afcpayroll",
     post_logout_redirect_uri: "http://localhost:5005/Default.aspx",
@@ -30,6 +30,9 @@ var config = {
     //silent_redirect_uri: "http://localhost:5005/silent.html"
 };
 var mgr = new Oidc.UserManager(config);
+
+
+
 //mgr.startSilentRenew();
 
 
@@ -47,7 +50,14 @@ mgr.getUser().then(function (user) {
     }
     else {
         console.log("User not logged in");
+        ///login();
     }
+
+    console.log('href ' + window.location.href); //returns the href (URL) of the current page
+    console.log('hostname ' + window.location.hostname); //returns the domain name of the web host
+    console.log('path name ' + window.location.pathname); //returns the path and filename of the current page
+    console.log('protocol ' + window.location.protocol); //returns the web protocol used (http: or https:)
+    //console.log('' + window.location.assign());
 });
 
 function login() {
