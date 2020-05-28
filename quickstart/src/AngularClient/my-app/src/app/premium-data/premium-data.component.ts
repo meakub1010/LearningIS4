@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class PremiumDataComponent implements OnInit {
 
   constructor() { }
-
+  title = "Hello from Premium Data Component";
   ngOnInit() {
   }
 

@@ -9,6 +9,9 @@ export class FreeDataComponent implements OnInit {
 
   constructor() { }
 
+  title = "Hello from Free Data Component";
+
+
   ngOnInit() {
   }
 
