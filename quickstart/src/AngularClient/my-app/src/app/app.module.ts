@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FreeDataComponent } from './free-data/free-data.component';
+import { PremiumDataComponent } from './premium-data/premium-data.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FreeDataComponent
+    FreeDataComponent,
+    PremiumDataComponent
   ],
   imports: [
     BrowserModule,
