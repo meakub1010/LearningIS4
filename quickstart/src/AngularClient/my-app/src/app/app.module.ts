@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FreeDataComponent } from './free-data/free-data.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FreeDataComponent
   ],
   imports: [
     BrowserModule,
